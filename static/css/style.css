@@ -1,0 +1,42 @@
+nav {
+    background-color: #ccc;
+    margin-bottom: 10px;
+}
+
+body {
+    background-color: #ebebeb;
+    padding-top: 70px;
+    padding-bottom: 100px;
+    position: relative;
+    min-height: 100vh;
+  }
+
+button.navbarspacing {
+    margin-bottom: 10px;
+}
+
+div.box {
+    padding: 7px;
+}
+
+div.featured_item {
+    border: 1px solid;
+    border-color: #dbdbdb;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+div.featured_item_pic > img {
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    height: 70px;
+    background-color: #ccc;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+}

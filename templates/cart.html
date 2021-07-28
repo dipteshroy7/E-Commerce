@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %} Cart {% endblock title %}
+{% block body %}
+<div class="container">
+    <div class="row" style="min-width: 960px">
+        {% if cart_items|length == 0 %}
+            <div class="box">
+                <div class="featured_item" style="min-height: 480px">
+                    <h5>My Cart</h5>
+                    <hr/>
+                    <div class="alert alert-dark" style="margin-top: 30px;" role="alert">
+                        Your cart is empty! Add items to it now.
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-8 box">
+                <div class="featured_item">
+                    <h5>My Cart ({{cart_items|length}})</h5>
+                    <hr/>
+                    {% for item in cart_items %}
+                        <div class="row">
+                            <div class="col-3 text-center">
+                                <img src="../static/product_images/{{item.image_name}}" alt="Product Image"  height="120px">
+                            </div>
+                            <div class="col-6">
+                                <p>{{item.name}}</p>
+                                <h5>&#8377;{{item.price * item.quantity}}</h5>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4" style="padding: 0px; width: 40px; margin-left: 12px;">
+                                            {% if item.quantity <= 1 %}
+                                                <button class="btn btn-outline-primary col-12" style="border-radius: 50%; width: 40px;" disabled><b>-</b></button>
+                                            {% else %}
+                                                <form action="/cart" method="POST">
+                                                    <input type="hidden" name="action" value="decrease">
+                                                    <input type = "hidden" name = "product_id" value = "{{item.id}}">
+                                                    <button class="btn btn-outline-primary col-12"  style="border-radius: 50%; width: 40px;"><b>-</b></button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-4 text-center" style="padding: 0px; width: 30px; margin: auto;">
+                                            <b>{{item.quantity}}</b>
+                                        </div>
+                                        <div class="col-4" style="padding: 0px; width: 40px; margin-right:12px;">
+                                            {% if item.quantity >= 10 %}
+                                                <button class="btn btn-outline-primary col-12" style="border-radius: 50%; width: 40px;" disabled><b>+</b></button>
+                                            {% else %}
+                                                <form action="/cart" method="POST">
+                                                    <input type="hidden" name="action" value="increase">
+                                                    <input type = "hidden" name = "product_id" value = "{{item.id}}">
+                                                    <button class="btn btn-outline-primary col-12"  style="border-radius: 50%; width: 40px;"><b>+</b></button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <form action="/cart" method="POST">
+                                    <input type="hidden" name="action" value="remove">
+                                    <input type = "hidden" name = "product_id" value = "{{item.id}}">
+                                    <button class="btn btn-outline-primary col-12" style="margin-top: 40px;"><b>REMOVE</b></button>
+                                </form>
+                            </div>
+                        </div>
+                        <hr/>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-9"></div>
+                        <div class="col-3">
+                            <form action="/billing" method="POST">
+                                <input type="hidden" name="total_amount" value="{{total_price}}">
+                                <button type="submit" class="btn btn-warning col-12"><b style="color: #fff;">CHECKOUT</b></button>
+                            </form>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 box">
+                <div class="featured_item">
+                    <h5>PRICE DETAILS</h5>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-6"><h6 style="margin: 0px;">Price ({{cart_items|length}} items)</h6></div>
+                        <div class="col-6"><h6 style="margin: 0px; float: right;">&#8377;{{total_price}}</h6></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6"><h6 style="margin: 0px;">Delivery Charges</h6></div>
+                        <div class="col-6"><h6 style="margin: 0px; float: right; color: #388e3c;">FREE</h6></div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-6"><h5 style="margin: 0px;">Total Amount</h5></div>
+                        <div class="col-6"><h5 style="margin: 0px; float: right;">&#8377;{{total_price}}</h5></div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

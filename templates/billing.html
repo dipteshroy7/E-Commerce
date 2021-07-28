@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Billing {% endblock title %}
+{% block body %}
+<div class="container">
+    <form action="/success" method='POST' style="min-width: 500px; max-width: 700px; margin:auto; background-color: #fff; border-radius:15px;">
+        <div style="padding: 15px 30px 30px 30px; margin-top: 15px;">
+            <h3>Address</h3>
+            <input type="text" class="form-control" name="address" placeholder="Enter your Address" autofocus required>
+            <br>
+            <h3 style="color: red;">Payment</h3>
+            <label >Name on Card</label>
+            <input type="text" class="form-control" name="holdername" placeholder="John Smith"  required>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-8">
+                    <label>Card Number</label>
+                    <input type="text" class="form-control" name="cardno" placeholder="0000-0000-0000-0000" required>
+                </div>
+                <div class="col-4">
+                    <label>CVV</label>
+                    <input type="password" class="form-control" name="cvcpwd" placeholder="&#9679;&#9679;&#9679;"  pattern="[0-9]{3}" required>
+                </div>
+            </div>
+            <div class="row"style="margin-top: 10px;">
+                <div class="col-12">
+                    <label>Expiration Date</label>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" name="exp" placeholder="MM/YY" required>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary form-control"><b>PAY - &#8377;{{total_amount}}</b></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}

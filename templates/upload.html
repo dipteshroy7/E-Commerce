@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} Upload {% endblock title %}
+{% block body %}
+
+<div class="container featured_item col-4" style="margin-top: 120px; min-width: 410px;">
+    <form method="post" enctype="multipart/form-data">
+        <h2>UPLOAD PRODUCT DATA</h2>
+        <input type="text" class="form-control" name="name" placeholder="Enter product name" required autofocus/>
+        <input type="text" class="form-control my-2" name="price" placeholder="Enter product price" required pattern="[0-9]{1,7}"/>
+        <p style="margin: 0px;">Product Image:</p>
+        <input type="file" class="form-control mt-1 mb-2" name="image" required>
+        <input type="submit" class="form-control mt-1 btn btn-outline-primary" value="UPLOAD">
+    </form>
+</div>
+
+{% endblock body %}

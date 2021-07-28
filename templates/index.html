@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% if all_products|length == 0 %}
+            <div class="alert alert-dark" role="alert">
+                No products found. Add new products first now!
+            </div>
+        {% else %}
+            {% for product in all_products %}
+            <div class="col-lg-3 col-md-4 col-sm-6 box">
+                <div class="featured_item">
+                    <div class="featured_item_pic text-center">
+                        <img src="../static/product_images/{{product.product_image_name}}" alt="Product Image"  height="200px">
+                    </div>
+                    <div class="featured_item_text text-center">
+                        <h6>{{product.product_name}}</h6>
+                        <h5>&#8377;{{product.product_price}}</h5>
+                        <form action="/cart" method="post">
+                            <input type="hidden" name="action" value="addtocart">
+                            <input type = "hidden" name = "product_id" value = "{{product.id}}">
+                            <button type="submit" class="btn btn-primary col-12"><i class="fa fa-shopping-cart" style="font-size:17px;color:white"></i><b>&nbsp; ADD TO CART</b></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}
